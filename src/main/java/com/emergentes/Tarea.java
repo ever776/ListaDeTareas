@@ -1,18 +1,18 @@
-
-
 package com.emergentes;
 
-
 public class Tarea {
+
     private int id;
     private String tarea;
+    private boolean compleatado;
 
     public Tarea() {
     }
 
-    public Tarea(int id, String tarea) {
+    public Tarea(int id, String tarea, boolean compleatado) {
         this.id = id;
         this.tarea = tarea;
+        this.compleatado = compleatado;
     }
 
     public int getId() {
@@ -31,7 +31,12 @@ public class Tarea {
         this.tarea = tarea;
     }
 
-  
-    
-    
+    public boolean isCompleatado() {
+        return compleatado;
+    }
+
+    public void setCompleatado(boolean compleatado) {
+        this.compleatado = compleatado;
+    }
+
 }

@@ -1,4 +1,3 @@
-
 package com.emergentes;
 
 import java.io.IOException;
@@ -23,12 +22,12 @@ public class MainServlet extends HttpServlet {
             int indice = -1;
             int id = Integer.parseInt(request.getParameter("id"));
             HttpSession ses = request.getSession();
-            
-            ArrayList<Tarea> list = (ArrayList<Tarea>)ses.getAttribute("tarea");
-            
-            for(Tarea t : list){
+
+            ArrayList<Tarea> list = (ArrayList<Tarea>) ses.getAttribute("tarea");
+
+            for (Tarea t : list) {
                 pos++;
-                System.out.println("pos: "+pos);
+
                 if (t.getId() == id) {
                     indice = pos;
                 }
@@ -41,22 +40,27 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         int id = Integer.parseInt(request.getParameter("id"));
         String tarea = request.getParameter("tarea");
-        
-        
+        String completado = request.getParameter("estado");
+
         Tarea tare = new Tarea();
-        
+
         tare.setId(id);
         tare.setTarea(tarea);
-        
+        if (completado.equals("si")) {
+            tare.setCompleatado(true);
+        } else if (completado.equals("no")) {
+            tare.setCompleatado(false);
+        }
+
         HttpSession ses = request.getSession();
-        
-        ArrayList<Tarea> ta = (ArrayList<Tarea>)ses.getAttribute("tarea");
-        
+
+        ArrayList<Tarea> ta = (ArrayList<Tarea>) ses.getAttribute("tarea");
+
         ta.add(tare);
-        
+
         response.sendRedirect("index.jsp");
     }
 

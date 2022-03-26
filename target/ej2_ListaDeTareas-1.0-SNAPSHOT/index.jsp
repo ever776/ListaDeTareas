@@ -16,27 +16,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <h1>Registrar nueva Tarea</h1>
-        <form action="MainServlet"  method="post">
-            <table>
-                <tr>
-                    <td>Id: </td>
-                    <td><input type="number" name="id" ></td>
-                </tr>
-                <tr>
-                    <td>Tarea: </td>
-                    <td><input type="text" name="tarea" ></td>
-                </tr>
-                <input type="text" name="completado" value="false" hidden>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Procesar" ></td>
-                </tr>
-            </table>
-        </form>
-
-        <h1>Tareas Pendientes</h1>
+    <body>       
+       <h1>Tareas Pendientes</h1>
+       <a href="agregarNuevaTarea.jsp" >Nuevo</a>
         <br>
         <br>
         <table border="1" cellspacing="0">
@@ -55,9 +37,16 @@
             %>
 
             <tr>
-                <td> <%= t.getId() %> </td>
-                <td> <%= t.getTarea() %> </td>
-                <td><input type='checkbox'></td>
+                <td> <%= t.getId()%> </td>
+                <td> <%= t.getTarea()%> </td>
+                <%
+                    
+                    if (t.isCompleatado()) {
+                        out.print("<td><input type='checkbox' checked></td>");
+                    } else {
+                        out.print("<td><input type='checkbox'></td>");
+                    }
+                %>
                 <td><a href="MainServlet?op=eliminar&id=<%= t.getId()%>" >Eliminar</a></td>
             </tr>
 
